@@ -12,10 +12,17 @@ const getTasks = async (req, res) => {
 
 // Create a new task
 const createTask = async (req, res) => {
-  const { title, description } = req.body;
+  const { assignedTo, status, dueDate, priority, comments, actions } = req.body;
 
   try {
-    const newTask = new Task({ title, description });
+    const newTask = new Task({
+      assignedTo,
+      status,
+      dueDate,
+      priority,
+      comments,
+      actions,
+    });
     await newTask.save();
     res.status(201).json(newTask);
   } catch (error) {
@@ -26,12 +33,19 @@ const createTask = async (req, res) => {
 // Update a task by ID
 const updateTask = async (req, res) => {
   const { id } = req.params;
-  const { title, description, completed } = req.body;
+  const { assignedTo, status, dueDate, priority, comments, actions } = req.body;
 
   try {
     const updatedTask = await Task.findByIdAndUpdate(
       id,
-      { title, description, completed },
+      {
+        assignedTo,
+        status,
+        dueDate,
+        priority,
+        comments,
+        actions,
+      },
       { new: true }
     );
     res.status(200).json(updatedTask);

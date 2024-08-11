@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-//database Connection with MongoDB
-
 const connectDB = async () => {
   console.log(process.env.MONGO_URL);
   try {
